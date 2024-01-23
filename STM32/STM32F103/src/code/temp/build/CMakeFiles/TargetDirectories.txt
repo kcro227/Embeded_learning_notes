@@ -1,0 +1,3 @@
+D:/CODE/STM32/1.Clion+Cmake/TemplateF103/build/CMakeFiles/TemplateF103.elf.dir
+D:/CODE/STM32/1.Clion+Cmake/TemplateF103/build/CMakeFiles/edit_cache.dir
+D:/CODE/STM32/1.Clion+Cmake/TemplateF103/build/CMakeFiles/rebuild_cache.dir
