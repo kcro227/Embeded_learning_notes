@@ -3,7 +3,7 @@
 #include <misc.h>
 #include <stm32f10x_rcc.h>
 #include "sys.h"
-#include "../Inc/usart.h"
+#include "usart.h"
 ////////////////////////////////////////////////////////////////////////////////// 	 
 //如果使用ucos,则包括下面的头文件即可.
 #if SYSTEM_SUPPORT_OS
@@ -37,15 +37,9 @@
 
 
 //////////////////////////////////////////////////////////////////
-//加入以下代码,支持printf函数,而不需要选择use MicroLIB	  
-#if 1
+//加入以下代码,支持printf函数
+#if USE_PRINTF
 #pragma import(__use_no_semihosting)
-
-//定义_sys_exit()以避免使用半主机模式
-int _sys_exit(int x) {
-    x = x;
-}
-//重定义fputc函数 
 #if !defined(OS_USE_SEMIHOSTING)
 
 #define STDIN_FILE_NO 0
@@ -72,24 +66,20 @@ int _write(int fd, char *ptr, int len) {
         uint32_t i;
         for (i = 0; i < len; i++) {
             USART_SendData(G_uart, ptr[i]);
-
             while (USART_GetFlagStatus(G_uart, USART_FLAG_TXE) == RESET);
         }
         while (USART_GetFlagStatus(G_uart, USART_FLAG_TC) == RESET);
-
         return len;
 
     }
     return -1;
 }
 
-
 int _close(int fd) {
     if (fd >= STDIN_FILE_NO && fd <= STDERR_FILE_NO)
         return 0;
     return -1;
 }
-
 
 int _lseek(int fd, int ptr, int dir) {
     (void) fd;
@@ -98,39 +88,18 @@ int _lseek(int fd, int ptr, int dir) {
     return -1;
 }
 
-
 int _read(int fd, char *ptr, int len) {
     if (fd == STDIN_FILE_NO) {
-        while (USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == RESET) {
+        while (USART_GetFlagStatus(G_uart, USART_FLAG_RXNE) == RESET) {
         }
-        *ptr = USART_ReceiveData(USART2);
+        *ptr = USART_ReceiveData(G_uart);
         return 1;
     }
     return -1;
 }
 
 #endif //#if !defined(OS_USE_SEMIHOSTING)
-
-
 #endif
-
-/*使用microLib的方法*/
-/*
-int fputc(int ch, FILE *f)
-{
-   USART_SendData(USART1, (uint8_t) ch);
-
-   while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET) {}
-
-   return ch;
-}
-int GetKey (void)  {
-
-   while (!(USART1->SR & USART_FLAG_RXNE));
-
-   return ((int)(USART1->DR & 0x1FF));
-}
-*/
 
 #if EN_USART1_RX   //如果使能了接收
 //串口1中断服务程序
@@ -141,7 +110,6 @@ u8 USART_RX_BUF[USART_REC_LEN];     //接收缓冲,最大USART_REC_LEN个字节.
 //bit14，	接收到0x0d
 //bit13~0，	接收到的有效字节数目
 u16 USART_RX_STA = 0;       //接收状态标记
-
 
 //串口发送数组
 void USART_SEND(USART_TypeDef *USARTx, u8 *buf) {
@@ -192,11 +160,15 @@ void uart_init(u32 bound) {
     USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;    //收发模式
 
     USART_Init(USART1, &USART_InitStructure); //初始化串口1
+#if USE_USART_REC_IRQn
     USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//开启串口接受中断
+#endif
     USART_Cmd(USART1, ENABLE);                    //使能串口1
 
 }
 
+
+#if USE_USART_REC_IRQn
 void USART1_IRQHandler(void)                    //串口1中断服务程序
 {
     u8 Res;
@@ -228,6 +200,6 @@ void USART1_IRQHandler(void)                    //串口1中断服务程序
     OSIntExit();
 #endif
 }
-
+#endif
 #endif	
 

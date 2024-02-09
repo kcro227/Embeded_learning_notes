@@ -4,16 +4,12 @@ SET(CMAKE_SYSTEM_VERSION 1)
 cmake_minimum_required(VERSION 3.7)
 
 # specify cross compilers and tools
-SET(tools "F:/stm32/tools/gcc-arm-none-eabi-10.3-2021.10/bin")
-SET(CMAKE_C_COMPILER_WORKS 1)
-SET(CMAKE_C_COMPILER "${tools}/arm-none-eabi-gcc.exe")
-#SET(CMAKE_C_COMPILER arm-none-eabi-gcc)
-SET(CMAKE_CXX_COMPILER_WORKS 1)
-SET(CMAKE_CXX_COMPILER "${tools}/arm-none-eabi-g++.exe")
-set(CMAKE_ASM_COMPILER  "${tools}/arm-none-eabi-gcc.exe")
-set(CMAKE_AR arm-none-eabi-ar)
-set(CMAKE_OBJCOPY "${tools}/arm-none-eabi-objcopy.exe")
-set(CMAKE_OBJDUMP "${tools}/arm-none-eabi-objdump.exe")
+set(CMAKE_C_COMPILER arm-none-eabi-gcc)
+set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
+set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
+set(CMAKE_AR arm-none-eabi-ar.exe)
+set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
+set(CMAKE_OBJDUMP arm-none-eabi-objdump)
 set(SIZE arm-none-eabi-size)
 
 SET(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F103C8Tx_FLASH.ld)
@@ -39,10 +35,16 @@ set(CMAKE_CXX_STANDARD 11)
 
 file(GLOB_RECURSE SOURCES "startup/*.*" "STM32F10x_FWLib/*.*" "Core/*.*" "SYSTEM/*.*")
 include_directories(STM32F10x_FWLib/Inc Core/Inc  SYSTEM/Inc)
+# 添加自定义组件的包含目录
+include_directories(components/led/inc
+                                    )
+
+add_subdirectory("Components")
 add_executable(${PROJECT_NAME}.elf ${SOURCES} ${LINKER_SCRIPT})
+target_link_libraries(${PROJECT_NAME}.elf USER_LIB)
 
 set(CMAKE_EXE_LINKER_FLAGS
-    "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map")
+    "${CMAKE_EXE_LINKER_FLAGS} -Wl,-Map=${PROJECT_BINARY_DIR}/${PROJECT_NAME}.map -u _printf_float")
 
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
