@@ -18,8 +18,16 @@
 5.进入源码目录
 > 执行 ```sudo make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl```
 
+
 6.注意事项
 > 如果提示 bc not found，则需要安装bc
 > ```sudo apt-get install bc```
 > 然后重新编译
-> 
+
+
+7.编译完成
+> 将bzImage文件复制到windows下，在C:/Users/<username>下新建.wslconfig文件，填入以下内容：
+> ```
+> [WSL2]
+> kernel=path/to/your/file # 此为内核路径，即bzimage文件的路径
+```
