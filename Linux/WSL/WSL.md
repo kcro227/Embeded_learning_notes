@@ -16,7 +16,7 @@
 > ```sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves```
 
 5.进入源码目录
-> 执行 ```make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl```
+> 执行 ```sudo make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl```
 
 6.注意事项
 > 如果提示 bc not found，则需要安装bc
