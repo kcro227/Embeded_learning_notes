@@ -1,4 +1,4 @@
 
-# 以下是Linux的学习笔记：
+# 浠ヤ笅鏄疞inux鐨勫涔犵瑪璁帮細
 
 ## [WSL](./WSL/WSL.md)
