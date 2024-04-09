@@ -33,6 +33,7 @@
 主要修改工具链为你自己安装的位置。修改后重新加载CmakeList.txt，然后就能编译了。
 或者在用户环境变量中加入编译链位置和 ```C:/windows/system32```
 如：```PATH=F:\stm32\gcc-arm-none-eabi-10.3-2021.10\bin\;C:/windows/system32```
+此段PATH可以修改成自己工具链的位置。
 ![](./src/img/6.png)
 
 ## 1.5 Printf重定向问题
