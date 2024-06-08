@@ -1,33 +1,33 @@
-# ÄÚºË±àÒë
+# å†…æ ¸ç¼–è¯‘
 
-## Ìí¼ÓUSBÇı¶¯
-1.¿ËÂ¡Î¢ÈíÄÚºË¾µÏñ
+## æ·»åŠ USBé©±åŠ¨
+1.å…‹éš†å¾®è½¯å†…æ ¸é•œåƒ
 > ![](./1.png)
 
-2.°²×°¿â
+2.å®‰è£…åº“
 > ```sudo apt install libncurses-dev```
 
-3.±à¼­ÅäÖÃÎÄ¼ş
+3.ç¼–è¾‘é…ç½®æ–‡ä»¶
 > ```sudo make menuconfig KCONFIG_CONFIG=Microsoft/config-wsl```
-> ½øÈëDevice Drivers -> USB support -> Support for Host-side USB £¬
-> Ñ¡ÖĞ USB Mass Storage supportºÍµ¯³öµÄËùÓĞÇı¶¯
+> è¿›å…¥Device Drivers -> USB support -> Support for Host-side USB ï¼Œ
+> é€‰ä¸­ USB Mass Storage supportå’Œå¼¹å‡ºçš„æ‰€æœ‰é©±åŠ¨
 
-4.°²×°±àÒë¹¤¾ß
+4.å®‰è£…ç¼–è¯‘å·¥å…·
 > ```sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves```
+> ```sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves```
+5.è¿›å…¥æºç ç›®å½•
+> æ‰§è¡Œ ```sudo make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl```
 
-5.½øÈëÔ´ÂëÄ¿Â¼
-> Ö´ĞĞ ```sudo make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl```
 
-
-6.×¢ÒâÊÂÏî
-> Èç¹ûÌáÊ¾ bc not found£¬ÔòĞèÒª°²×°bc
+6.æ³¨æ„äº‹é¡¹
+> å¦‚æœæç¤º bc not foundï¼Œåˆ™éœ€è¦å®‰è£…bc
 > ```sudo apt-get install bc```
-> È»ºóÖØĞÂ±àÒë
+> ç„¶åé‡æ–°ç¼–è¯‘
 
 
-7.±àÒëÍê³É
-> ½«bzImageÎÄ¼ş¸´ÖÆµ½windowsÏÂ£¬ÔÚC:/Users/<username>ÏÂĞÂ½¨.wslconfigÎÄ¼ş£¬ÌîÈëÒÔÏÂÄÚÈİ£º
+7.ç¼–è¯‘å®Œæˆ
+> å°†bzImageæ–‡ä»¶å¤åˆ¶åˆ°windowsä¸‹ï¼Œåœ¨C:/Users/<username>ä¸‹æ–°å»º.wslconfigæ–‡ä»¶ï¼Œå¡«å…¥ä»¥ä¸‹å†…å®¹ï¼š
 > ```
 > [WSL2]
-> kernel=path/to/your/file # ´ËÎªÄÚºËÂ·¾¶£¬¼´bzimageÎÄ¼şµÄÂ·¾¶
+> kernel=path/to/your/file # æ­¤ä¸ºå†…æ ¸è·¯å¾„ï¼Œå³bzimageæ–‡ä»¶çš„è·¯å¾„
 ```
