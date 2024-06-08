@@ -4,3 +4,4 @@
 
 - ## [WSL](./WSL/WSL.md)
 - ## [milkV-duo](./milkV/milkV.md)
+- ## [OrangePI5](./OrangePi-5/orangepi.md)
