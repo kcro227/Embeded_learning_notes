@@ -5,16 +5,17 @@
 > ![](./1.png)
 
 2.安装库
-> ```sudo apt install libncurses-dev```
+> ```sudo apt install libncurses-dev -y```
 
-3.编辑配置文件
+3.安装编译工具
+> ```sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves make gcc -y```
+
+4.编辑配置文件
 > ```sudo make menuconfig KCONFIG_CONFIG=Microsoft/config-wsl```
 > 进入Device Drivers -> USB support -> Support for Host-side USB ，
 > 选中 USB Mass Storage support和弹出的所有驱动
 
-4.安装编译工具
-> ```sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves```
-> ```sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves```
+
 5.进入源码目录
 > 执行 ```sudo make -j$(nproc) bzImage KCONFIG_CONFIG=Microsoft/config-wsl```
 
