@@ -55,8 +55,14 @@ sudo make -j 12 && sudo make modules_install -j 12 && sudo make install -j 12
 编译usbip
 ```bash
 cd tools/usb/usbip
+```
+```bash
 sudo ./autogen.sh
+```
+```bash
 sudo ./configure
+```
+```bash
 sudo make install -j 12
 ```
 复制工具链
