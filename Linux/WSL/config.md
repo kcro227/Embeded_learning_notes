@@ -40,7 +40,7 @@
 
 首先安装工具链
 ```bash
-sudo apt install build-essential flex bison libssl-dev libelf-dev libncurses-dev autoconf libudev-dev libtool
+sudo apt install build-essential flex bison libssl-dev libelf-dev libncurses-dev autoconf libudev-dev libtool bc
 ```
 
 然后复制当前内核的设置：
