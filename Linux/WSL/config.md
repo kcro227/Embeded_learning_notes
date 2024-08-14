@@ -28,7 +28,7 @@
 
 7.编译完成
 > 将bzImage文件复制到windows下，在C:/Users/<username>下新建.wslconfig文件，填入以下内容：
-> ```
+``` 
 > [WSL2]
 > kernel=path/to/your/file # 此为内核路径，即bzimage文件的路径
 ```
