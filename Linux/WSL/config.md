@@ -3,6 +3,9 @@
 ## 添加USB驱动
 1.克隆微软内核镜像
 > ![](./1.png)
+> ```bash
+> git clone https://github.com/microsoft/WSL2-Linux-Kernel.git
+> ```
 
 2.安装库
 > ```sudo apt install libncurses-dev -y```
